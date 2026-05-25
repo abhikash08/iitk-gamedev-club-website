@@ -9,3 +9,12 @@ export const getImagePath = (path = '') => {
   // If path is already relative, prepend BASE_URL
   return `${BASE_URL}${path}`;
 };
+
+export const getAssetPath = (path = '') => {
+  // Generic asset path resolver for any static asset
+  return getImagePath(path);
+};
+
+// For production builds, vite will optimize relative paths automatically
+// Just make sure to use BASE_URL for any absolute paths starting with /
+export const useBaseUrl = () => BASE_URL;
