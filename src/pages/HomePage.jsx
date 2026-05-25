@@ -3,8 +3,14 @@ import { Link } from 'react-router-dom';
 import Card from '../components/Card';
 import ScrollReveal from '../components/ScrollReveal';
 import { fetchCsv } from '../utils/csv';
+import { getImagePath } from '../utils/paths';
 
 const winningGameTitles = new Set(['cell - o', 'cell-o', 'ignition evade']);
+
+const normalizeGame = (game) => ({
+  ...game,
+  image: getImagePath(game.image || ''),
+});
 
 const HomePage = () => {
   const [games, setGames] = useState([]);
@@ -13,7 +19,9 @@ const HomePage = () => {
   useEffect(() => {
     Promise.all([fetchCsv('/data/games.csv'), fetchCsv('/data/events.csv')])
       .then(([gameRows, eventRows]) => {
-        const winningGames = gameRows.filter((game) => winningGameTitles.has(game.title.toLowerCase()));
+        const winningGames = gameRows
+          .filter((game) => winningGameTitles.has(game.title.toLowerCase()))
+          .map(normalizeGame);
         setGames(winningGames);
         setEvents(eventRows);
       })
