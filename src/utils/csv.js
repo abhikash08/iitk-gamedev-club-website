@@ -1,5 +1,7 @@
 import Papa from 'papaparse';
 
+const BASE_URL = import.meta.env.BASE_URL;
+
 export const parseCsvText = (csvText) => {
   const result = Papa.parse(csvText, {
     header: true,
@@ -19,9 +21,10 @@ export const parseCsvText = (csvText) => {
 };
 
 export const fetchCsv = async (path) => {
-  const response = await fetch(path);
+  const fullPath = path.startsWith('/') ? `${BASE_URL}${path.slice(1)}` : `${BASE_URL}${path}`;
+  const response = await fetch(fullPath);
   if (!response.ok) {
-    throw new Error(`Failed to fetch CSV: ${path}`);
+    throw new Error(`Failed to fetch CSV: ${fullPath}`);
   }
   const csvText = await response.text();
   return parseCsvText(csvText);

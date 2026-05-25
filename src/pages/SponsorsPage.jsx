@@ -9,7 +9,7 @@ const SponsorsPage = () => {
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {sponsors.map(([name, href]) => (
           <Card key={name} className="flex items-center justify-between">
-            <img src="/images/logo-placeholder.svg" alt={name} loading="lazy" className="h-10 w-10" />
+            <img src={`${import.meta.env.BASE_URL}images/logo-placeholder.svg`} alt={name} loading="lazy" className="h-10 w-10" />
             <a href={href} target="_blank" rel="noreferrer" className="font-semibold text-slate-200 hover:text-accent">
               {name}
             </a>
