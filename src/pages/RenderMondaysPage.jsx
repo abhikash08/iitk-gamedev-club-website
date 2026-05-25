@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 import Card from '../components/Card';
 import SectionHeader from '../components/SectionHeader';
 import { fetchCsv } from '../utils/csv';
+import { getImagePath } from '../utils/paths';
 
 const RenderMondaysPage = () => {
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
     fetchCsv('/data/rendermondays.csv')
-      .then(setEntries)
+      .then((entries) => setEntries(entries.map((entry) => ({ ...entry, image: getImagePath(entry.image) }))))
       .catch((error) => console.error(error));
   }, []);
 

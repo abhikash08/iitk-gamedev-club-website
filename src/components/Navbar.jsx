@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-
-const BASE_URL = import.meta.env.BASE_URL;
+import { getImagePath } from '../utils/paths';
 
 const navItems = [
   ['/', 'Home'],
@@ -31,7 +30,7 @@ const Navbar = () => {
             <NavLink to="/" className="min-w-0 flex items-center gap-2 leading-tight sm:gap-3" onClick={() => setOpen(false)}>
               <div className="relative shrink-0">
                 <img
-                  src={`${BASE_URL}images/logo.jpeg`}
+                  src={getImagePath('/images/logo.jpeg')}
                   alt="Game Development Club Logo"
                   className="h-10 w-10 rounded-full border border-white/15 object-cover shadow-[0_0_16px_rgba(181,159,119,0.12)] sm:h-11 sm:w-11"
                   loading="lazy"

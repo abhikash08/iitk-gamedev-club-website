@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import Card from '../components/Card';
 import { fetchCsv } from '../utils/csv';
+import { getImagePath } from '../utils/paths';
 
 const EmptyState = ({ message }) => (
   <Card>
@@ -8,7 +9,7 @@ const EmptyState = ({ message }) => (
   </Card>
 );
 
-const normalizePhotoPath = (photo = '') => (photo ? photo.replace(/^\/public/, '') : '/images/team-rohan.svg');
+const normalizePhotoPath = (photo = '') => getImagePath(photo ? photo.replace(/^\/public/, '') : '/images/team-rohan.svg');
 
 const ContactItem = ({ label, value, href }) => {
   if (!value) {

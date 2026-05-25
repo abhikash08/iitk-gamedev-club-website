@@ -4,6 +4,7 @@ import Card from '../components/Card';
 import SectionHeader from '../components/SectionHeader';
 import { fetchCsv } from '../utils/csv';
 import { getGamePlayerRoute, normalizeGameBuildPath } from '../utils/games';
+import { getImagePath } from '../utils/paths';
 
 const genreOrder = [
   'Action',
@@ -70,7 +71,7 @@ const inferGenres = (game) => {
 
 const normalizeGame = (game) => ({
   ...game,
-  image: game.image || '/images/project-cello.svg',
+  image: getImagePath(game.image || '/images/project-cello.svg'),
   play: normalizeGameBuildPath(game.play),
   playerRoute: getGamePlayerRoute(game.play),
   genres: inferGenres(game),

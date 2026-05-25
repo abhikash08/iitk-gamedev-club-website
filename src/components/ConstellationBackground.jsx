@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-
-const BASE_URL = import.meta.env.BASE_URL;
+import { getImagePath } from '../utils/paths';
 
 const routeStars = [
   { path: '/', label: 'Home', x: 50, y: 18 },
@@ -87,13 +86,13 @@ const ConstellationBackground = () => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_12%,rgba(181,159,119,0.12),transparent_24%),radial-gradient(circle_at_22%_30%,rgba(216,217,221,0.08),transparent_18%),radial-gradient(circle_at_76%_72%,rgba(181,159,119,0.08),transparent_18%)]" />
 
       <div className="absolute left-1/2 top-1/2 h-[94vh] max-h-[1100px] aspect-[1024/1536] -translate-x-1/2 -translate-y-[44%]">
-        <img src={`${BASE_URL}images/centaurus constellation.png`} alt="" className="h-full w-full object-contain opacity-[0.16] mix-blend-screen" />
+        <img src={getImagePath('/images/centaurus constellation.png')} alt="" className="h-full w-full object-contain opacity-[0.16] mix-blend-screen" />
 
         {location.pathname === '/' ? (
           <div className="absolute left-[50%] top-[44.5%] aspect-square w-[95%] -translate-x-1/2 -translate-y-1/2" style={{ opacity: homeLogoOpacity }}>
             <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(181,159,119,0.26),transparent_65%)] blur-2xl" />
             <div className="relative h-full w-full overflow-hidden rounded-full border border-white/15">
-              <img src={`${BASE_URL}images/logo_noback.png`} alt="" className="absolute inset-0 h-full w-full scale-[0.94] object-contain object-center" />
+              <img src={getImagePath('/images/logo_noback.png')} alt="" className="absolute inset-0 h-full w-full scale-[0.94] object-contain object-center" />
             </div>
           </div>
         ) : null}
