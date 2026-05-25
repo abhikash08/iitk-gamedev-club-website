@@ -7,6 +7,11 @@ import { getImagePath } from '../utils/paths';
 
 const winningGameTitles = new Set(['cell - o', 'cell-o', 'ignition evade']);
 
+const normalizeGameImage = (game) => ({
+  ...game,
+  image: getImagePath(game.image || ''),
+});
+
 const HomePage = () => {
   const [games, setGames] = useState([]);
   const [events, setEvents] = useState([]);
@@ -14,7 +19,7 @@ const HomePage = () => {
   useEffect(() => {
     Promise.all([fetchCsv('/data/games.csv'), fetchCsv('/data/events.csv')])
       .then(([gameRows, eventRows]) => {
-        const winningGames = gameRows.filter((game) => winningGameTitles.has(game.title.toLowerCase()));
+        const winningGames = gameRows.filter((game) => winningGameTitles.has(game.title.toLowerCase())).map(normalizeGameImage);
         setGames(winningGames);
         setEvents(eventRows);
       })
@@ -95,7 +100,7 @@ const HomePage = () => {
           {games.map((game, index) => (
             <ScrollReveal key={game.title} delay={index * 110} distance={24}>
               <Card>
-                {game.image ? <img src={getImagePath(game.image)} alt={game.title} loading="lazy" className="mb-4 h-44 w-full rounded-xl object-cover" /> : null}
+                {game.image ? <img src={game.image} alt={game.title} loading="lazy" className="mb-4 h-44 w-full rounded-xl object-cover" /> : null}
                 <h3 className="text-xl font-semibold">{game.title}</h3>
                 {game.description ? <p className="mt-2 text-base text-slate-300">{game.description}</p> : null}
               </Card>
