@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Card from '../components/Card';
 import ScrollReveal from '../components/ScrollReveal';
 import { fetchCsv } from '../utils/csv';
+import { getImagePath } from '../utils/paths';
 
 const winningGameTitles = new Set(['cell - o', 'cell-o', 'ignition evade']);
 
@@ -94,7 +95,7 @@ const HomePage = () => {
           {games.map((game, index) => (
             <ScrollReveal key={game.title} delay={index * 110} distance={24}>
               <Card>
-                {game.image ? <img src={game.image} alt={game.title} loading="lazy" className="mb-4 h-44 w-full rounded-xl object-cover" /> : null}
+                {game.image ? <img src={getImagePath(game.image)} alt={game.title} loading="lazy" className="mb-4 h-44 w-full rounded-xl object-cover" /> : null}
                 <h3 className="text-xl font-semibold">{game.title}</h3>
                 {game.description ? <p className="mt-2 text-base text-slate-300">{game.description}</p> : null}
               </Card>
